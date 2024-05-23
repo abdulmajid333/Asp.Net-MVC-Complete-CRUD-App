@@ -1,0 +1,100 @@
+﻿@model CompleteApp.Models.tbluser1
+@{
+    ViewBag.Title = "UserInsert";
+}
+
+<h2>User Insert</h2>
+
+@using (Html.BeginForm("UserInsert" , "User" , FormMethod.Post , new { enctype = "multipart/form-data" }))
+{ 
+    <table>
+
+        <tr class="">
+            <td>Name :</td>
+            <td>@Html.TextBoxFor(x=>x.username , new { @class = "form-control" })</td>
+        </tr>
+
+        <tr>
+            <td>Email :</td>
+            <td>@Html.TextBoxFor(x=>x.useremail, new { @class = "form-control" })</td>
+        </tr>
+
+        <tr>
+            <td>Password :</td>
+            <td>@Html.TextBoxFor(x=>x.userpassword, new { @class = "form-control" })</td>
+        </tr>
+
+        <tr>
+            <td>Mobile Number :</td>
+            <td>@Html.TextBoxFor(x=>x.usermobilenumber, new { @class = "form-control" })</td>
+        </tr>
+
+        <tr>
+            <td>Age :</td>
+            <td>@Html.TextBoxFor(x=>x.userage, new { @class = "form-control" })</td>
+        </tr>
+
+        <tr>
+            <td>Country :</td>
+            <td>@Html.DropDownListFor(x=>x.usercountry, new SelectList(ViewBag.ctr, "countryid" , "countryname"), "--Select--" , new { onchange="BindState()", @class = "btn btn-outline-success dropdown-toggle" } )</td>
+        </tr>
+
+        <tr>
+            <td>State :</td>
+            <td>@Html.DropDownListFor(x => x.userstate, new SelectList(""), "--Select--" , new { @class = "btn btn-outline-success dropdown-toggle" })</td>
+        </tr>
+
+        <tr>
+            <td>Gender :</td>
+            <td>
+                @for(var i = 0; i < Model.lstgender.Count; i++)
+                {
+                    @Html.RadioButtonFor(x=>x.usergender, Model.lstgender[i].genderid, new { @class = "form-check-input" }) @Model.lstgender[i].gendername
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Hobby :</td>
+            <td>
+                @for( var i = 0; i < Model.lsthobby1.Count; i++)
+                {
+                    @Html.CheckBoxFor(x => x.lsthobby1[i].ischecked, new { @class = "form-check-input" })
+                    @Html.DisplayFor(x => x.lsthobby1[i].hobbyname)
+                    @Html.HiddenFor(x => x.lsthobby1[i].hobbyname)
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Profile Pic :</td>
+            <td><input type="file" name="userdpfile" class="form-control" /></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Insert" class="btn btn-primary"/></td>
+        </tr>
+    </table>
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    function BindState() {
+        $.ajax({
+            url: '../User/GetUserState',
+            type: 'post',
+            data: {Cid : $("#usercountry").val()},
+            success: function (data) {
+                $("#userstate").empty();
+                $("#userstate").append($('<option></option>').html("--Select--").val(0));
+                for (var i = 0; i < data.length; i++) {
+                    $("#userstate").append($('<option></option>').html(data[i].statename).val(data[i].stateid));
+                }
+            },
+            error: function () {
+                alert('State not bind....');
+            }
+        });
+    }
+</script>

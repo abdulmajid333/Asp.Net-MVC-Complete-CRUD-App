@@ -1,0 +1,41 @@
+﻿@model CompleteApp.Models.tbluser
+@{
+    ViewBag.Title = "UserLoginForm";
+}
+
+<h2>UserLoginForm</h2>
+
+@using(Html.BeginForm("UserLoginForm","UserLogin",FormMethod.Post))
+{ 
+    <table>
+
+        <tr>
+            <td>Email :</td>
+            <td>@Html.TextBoxFor(x=>x.useremail)</td>
+        </tr>
+
+        <tr>
+            <td>Password :</td>
+            <td>@Html.TextBoxFor(x=>x.userpassword)</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Login" class="btn btn-outline-primary" />
+                @Html.ActionLink("Register", "UserInsert", "User" , new { @class = "btn btn-success" })
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                @if(ViewBag.msg != null)
+                {
+                    <span>@ViewBag.msg</span>
+                }
+            </td>
+        </tr>
+
+    </table>
+}

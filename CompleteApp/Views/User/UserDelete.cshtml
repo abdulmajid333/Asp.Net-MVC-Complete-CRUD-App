@@ -1,0 +1,65 @@
+﻿@model CompleteApp.Models.tbluser
+@{
+    ViewBag.Title = "UserDelete";
+}
+
+<h2>User Delete</h2>
+
+<h3>Are you sure you want to delete this ?</h3>
+
+
+
+<div>
+
+    <dl>
+
+        <dt>Name :</dt>
+        <dd>@Html.DisplayFor(x => x.username)</dd>
+
+        <dt>Email :</dt>
+        <dd>@Html.DisplayFor(x => x.useremail)</dd>
+
+        <dt>Password :</dt>
+        <dd>@Html.DisplayFor(x => x.userpassword)</dd>
+
+        <dt>Mobile Number :</dt>
+        <dd>@Html.DisplayFor(x => x.usermobilenumber)</dd>
+
+        <dt>Age :</dt>
+        <dd>@Html.DisplayFor(x => x.userage)</dd>
+
+        <dt>Country :</dt>
+        <dd>@Html.DisplayFor(x => x.usercountry)</dd>
+
+        <dt>State :</dt>
+        <dd>@Html.DisplayFor(x => x.userstate)</dd>
+
+        <dt>Gender :</dt>
+        <dd>@Html.DisplayFor(x => x.usergender)</dd>
+
+        <dt>Hobby :</dt>
+        <dd>@Html.DisplayFor(x => x.userhobby)</dd>
+
+        <dt>Display Picture :</dt>
+        <dd><img src="@Url.Content(Model.userdp)" style="height:60px;width:60px" /></dd>
+
+    </dl>
+
+</div>
+
+@using (Html.BeginForm("UserDelete" , "User" , FormMethod.Post))
+{
+    @Html.HiddenFor(x=>x.userid)
+    @Html.HiddenFor(x=>x.userdp)
+    <input type="submit" value="Delete" class="btn btn-danger" />
+}
+    
+
+
+
+
+
+    
+
+
+

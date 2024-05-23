@@ -1,0 +1,38 @@
+﻿@model CompleteApp.Models.tbluserblog
+@{
+    ViewBag.Title = "AddUserBlog";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>Add User Blog</h2>
+
+@using (Html.BeginForm("AddUserBlog","Blog",FormMethod.Post , new { enctype = "multipart/form-data" }))
+{
+
+    <table>
+
+        <tr>
+            <td>Title :</td>
+            <td>@Html.TextBoxFor(x => x.blogtitle)</td>
+        </tr>
+
+        <tr>
+            <td>Description :</td>
+            <td>@Html.TextAreaFor(x => x.blogdescription)</td>
+        </tr>
+
+        <tr>
+            <td>Image :</td>
+            <td><input type="file" name="blogimagefile" /></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Add" class="btn btn-outline-primary" />
+            </td>
+        </tr>
+
+    </table>
+
+}

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CompleteApp.Models.tbluserblog>
+@{
+    ViewBag.Title = "ShowBlog";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>Show Blog</h2>
+
+<center>
+
+    <div>
+
+        @foreach (var b in Model)
+        {
+
+            <h3>@b.blogtitle</h3>
+            <p>@b.blogdescription</p>
+            <img src="@Url.Content(b.blogimage)" style="width:200px;height:200px" />
+
+        }
+
+    </div>
+
+</center>
+
+<div>
+
+    @{
+
+        double totalPages = ViewBag.totalpages;
+
+        for (int i = 1; i <= totalPages; i++)
+        {
+            
+                <ul class="pagination">
+
+                    @if (i == ViewBag.pageNumber)
+                    {
+
+                        <li class="active page-item">
+                            @Html.ActionLink(i.ToString(), "ShowBlog", new { pageNumber = i }, new { @class = "page-link" })
+                        </li>
+
+                    }
+                    else
+                    {
+
+                        <li class="page-item">
+                            @Html.ActionLink(i.ToString(), "ShowBlog", new { pageNumber = i }, new { @class = "page-link" })
+                        </li>
+
+                    }
+
+                </ul>    
+
+        }
+
+    }
+
+
+
+</div>
+
+
+
+    

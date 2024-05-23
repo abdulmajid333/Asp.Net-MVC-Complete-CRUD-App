@@ -1,0 +1,58 @@
+﻿@model IEnumerable<CompleteApp.Models.tbluserjoin>
+@{
+    ViewBag.Title = "UserShow";
+}
+
+<h2>User Show</h2>
+
+<table class="table table-hover">
+
+    <thead>
+
+        <tr class="table-dark">
+
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Mobile Number</th>
+            <th>Age</th>
+            <th>Country</th>
+            <th>State</th>
+            <th>Gender</th>
+            <th>Hobby</th>
+            <th>D P</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach(var a in Model)
+        { 
+            <tr class="table-light">
+
+                <td>@a.userid</td>
+                <td>@a.username</td>
+                <td>@a.useremail</td>
+                <td>@a.userpassword</td>
+                <td>@a.usermobilenumber</td>
+                <td>@a.userage</td>
+                <td>@a.usercountry</td>
+                <td>@a.userstate</td>
+                <td>@a.usergender</td>
+                <td>@a.userhobby</td>
+                <td><img src="@Url.Content(a.userdp)" style="width:60px;height:60px" /></td>
+                <td>@Html.ActionLink( "Edit" , "UserEdit" , new { id = a.userid } )</td>
+                <td>@Html.ActionLink( "Delete" , "UserDelete" , new { id = a.userid } )</td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
